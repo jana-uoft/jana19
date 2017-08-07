@@ -22,7 +22,8 @@
     "eject": "react-scripts eject"
   },
   "jest": {
-    "testResultsProcessor": "./node_modules/jest-junit"
+    "testResultsProcessor": "./node_modules/jest-junit",
+    "collectCoverage": true
   },
   "jest-junit": {
     "output": "./junit_test_results.xml"
