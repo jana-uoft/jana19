@@ -6,6 +6,9 @@ import WorkIcon from 'material-ui-icons/Work';
 import SchoolIcon from 'material-ui-icons/School';
 import DeveloperModeIcon from 'material-ui-icons/DeveloperMode';
 import ContactMailIcon from 'material-ui-icons/ContactMail';
+import ProfilePic from '../assets/avatar.jpg';
+import Avatar from 'material-ui/Avatar';
+
 
 
 class Sidebar extends Component {
@@ -23,14 +26,39 @@ class Sidebar extends Component {
 
   render() {
 
-    const ListItems = (
-      <div>
-        <ListItem primaryText="Home" leftIcon={<HomeIcon />} />
-        <ListItem primaryText="Work" leftIcon={<WorkIcon />} />
-        <ListItem primaryText="Education" leftIcon={<SchoolIcon />} />
-        <ListItem primaryText="Projects" leftIcon={<DeveloperModeIcon />} />
-        <ListItem primaryText="Contact" leftIcon={<ContactMailIcon />} />
-      </div>
+    const MenuItems = (
+      <List>
+        <ListItem 
+          primaryText="Home" 
+          leftIcon={<HomeIcon />} 
+          style={this.props.activePage==="Home"? {backgroundColor: '#39424f'} : null} 
+          onClick={()=>this.props.setActivePage("Home")} 
+        />
+        <ListItem 
+          primaryText="Work" 
+          leftIcon={<WorkIcon />} 
+          style={this.props.activePage==="Work"? {backgroundColor: '#39424f'} : null} 
+          onClick={()=>this.props.setActivePage("Work")} 
+        />
+        <ListItem 
+          primaryText="Education" 
+          leftIcon={<SchoolIcon />} 
+          style={this.props.activePage==="Education"? {backgroundColor: '#39424f'} : null} 
+          onClick={()=>this.props.setActivePage("Education")} 
+        />
+        <ListItem 
+          primaryText="Projects" 
+          leftIcon={<DeveloperModeIcon />} 
+          style={this.props.activePage==="Projects"? {backgroundColor: '#39424f'} : null} 
+          onClick={()=>this.props.setActivePage("Projects")} 
+        />
+        <ListItem 
+          primaryText="Contact" 
+          leftIcon={<ContactMailIcon />}
+          style={this.props.activePage==="Contact"? {backgroundColor: '#39424f'} : null} 
+          onClick={()=>this.props.setActivePage("Contact")}  
+        />
+      </List>
     );
 
     return (
@@ -39,12 +67,14 @@ class Sidebar extends Component {
         onRequestClose={this.toggleDrawer}
         onClick={this.handleLeftClose}
         docked={true}
+        containerStyle={{ backgroundColor: '#161719' }}
 
       >
-        <List>
-          {ListItems}
-        </List>
-      </Drawer>
+        <div style={{textAlign: "center", marginTop: 10}} >
+          <Avatar src={ProfilePic} size={150} />
+        </div>
+        {MenuItems}
+       </Drawer>
     );
   }
 }
