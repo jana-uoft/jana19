@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Sidebar from './components/Sidebar';
 import Home from './components/Home';
-import Work from './components/Work';
+import Resume from './components/Resume';
 import Education from './components/Education';
 import Projects from './components/Projects';
 import Contact from './components/Contact';
@@ -18,28 +18,15 @@ class App extends Component {
     }
   }
 
-  setActivePage = (activePage) => {
-    this.setState({activePage})
-  }
+  setActivePage = (activePage) => this.setState({activePage});
 
-  updateDimensions = () => {
-    this.setState({
-      height: window.innerHeight,
-    });
-  }
+  updateDimensions = () => this.setState({ height: window.innerHeight });
 
-  componentWillMmount() {
-    window.removeEventListener("resize", this.updateDimensions);
-  }
+  componentWillMmount() { window.removeEventListener("resize", this.updateDimensions) }
 
-  componentDidMount() {
-    this.updateDimensions();
-  }
+  componentDidMount() { this.updateDimensions() }
 
-  componentWillUnmount() {
-    window.removeEventListener("resize", this.updateDimensions);
-  }
-
+  componentWillUnmount() { window.removeEventListener("resize", this.updateDimensions) }
 
 
   render() {
@@ -51,8 +38,9 @@ class App extends Component {
 
     let pageToRender;
     switch (this.state.activePage) {
-      case "Work": {
-        pageToRender = <Work/>;
+      case "Resume": {
+        pageToRender = <Resume/>;
+        contentStyle.marginRight = 500;
         break;
       }
       case "Education": {

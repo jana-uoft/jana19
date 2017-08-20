@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Drawer from 'material-ui/Drawer';
 import { List, ListItem } from 'material-ui/List';
 import HomeIcon from 'material-ui-icons/Home';
-import WorkIcon from 'material-ui-icons/Work';
+import ResumeIcon from 'material-ui-icons/Assignment';
 import SchoolIcon from 'material-ui-icons/School';
 import DeveloperModeIcon from 'material-ui-icons/DeveloperMode';
 import ContactMailIcon from 'material-ui-icons/ContactMail';
@@ -35,10 +35,10 @@ class Sidebar extends Component {
           onClick={()=>this.props.setActivePage("Home")} 
         />
         <ListItem 
-          primaryText="Work" 
-          leftIcon={<WorkIcon />} 
-          style={this.props.activePage==="Work"? {backgroundColor: '#39424f'} : null} 
-          onClick={()=>this.props.setActivePage("Work")} 
+          primaryText="Resume" 
+          leftIcon={<ResumeIcon />} 
+          style={this.props.activePage==="Resume"? {backgroundColor: '#39424f'} : null} 
+          onClick={()=>this.props.setActivePage("Resume")} 
         />
         <ListItem 
           primaryText="Education" 
