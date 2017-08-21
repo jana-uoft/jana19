@@ -15,13 +15,8 @@ class Sidebar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      open: true
     }
   }
-
-  toggleDrawer = (open=false) => {
-    this.setState({ open });
-  };
 
 
   render() {
@@ -63,11 +58,12 @@ class Sidebar extends Component {
 
     return (
       <Drawer
-        open={this.state.open}
-        onRequestClose={this.toggleDrawer}
-        onClick={this.handleLeftClose}
-        docked={true}
+        key="Sidebar"
+        open={this.props.open}
+        onRequestChange={()=>this.props.toggleDrawer(false)}
+        docked={this.props.docked}
         containerStyle={{ backgroundColor: '#161719' }}
+        disableSwipeToOpen={true}
 
       >
         <div style={{textAlign: "center", marginTop: 10}} >
