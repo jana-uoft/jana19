@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Sidebar from './components/Sidebar';
 import Home from './components/Home';
 import Resume from './components/Resume';
-import Education from './components/Education';
+import Social from './components/Social';
 import Projects from './components/Projects';
 import Contact from './components/Contact';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
@@ -68,8 +68,8 @@ class App extends Component {
           contentStyle.paddingRight = 0;
         break;
       }
-      case "Education": {
-        pageToRender = <Education/>;
+      case "Social": {
+        pageToRender = <Social/>;
         break;
       }
       case "Projects": {

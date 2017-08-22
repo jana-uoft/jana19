@@ -7,11 +7,13 @@ import ArrowBackIcon from 'material-ui-icons/ArrowBack';
 import ComputerIcon from 'material-ui-icons/Computer';
 import WorkIcon from 'material-ui-icons/Work';
 import PeopleIcon from 'material-ui-icons/People';
+import SchoolIcon from 'material-ui-icons/School';
 
 
 import technicalExperiences from './Resume/technicalExperience';
 import workExperiences from './Resume/workExperience';
 import volunteerExperiences from './Resume/volunteerExperience';
+import educationalExperiences from './Resume/educationalExperience';
 
 
 import ImportExportIcon from 'material-ui-icons/ImportExport';
@@ -179,6 +181,26 @@ class Resume extends Component {
       </Card>
     );
 
+    let educationalExperienceTitle = (<div><SchoolIcon style={style.cardTitleIcon} color={'#0b8ea3'}/> Education </div>);
+    let educationalExperience = (
+      <Card initiallyExpanded={true}>
+        <CardHeader
+          title={educationalExperienceTitle}
+          titleStyle={style.cardTitle}
+          showExpandableButton={true}
+          actAsExpander={true}
+          style={{paddingBottom: 5}}
+        />
+        <CardText expandable={true} style={{padding: 0}}>
+          <Table selectable={false}>
+            <TableBody displayRowCheckbox={false}>
+              {educationalExperiences.map((value)=>this.getWorkExperience(value, style))}
+            </TableBody>
+          </Table>
+        </CardText>
+      </Card>
+    );
+
 
     let resumeDrawerOpenIcon;
     if (this.props.mobileView || !this.state.resumeDrawerOpen) {
@@ -251,6 +273,8 @@ class Resume extends Component {
           {workExperience}
           <br/>
           {volunteerExperience}
+          <br/>
+          {educationalExperience}
         </div>
       </div>
     );
