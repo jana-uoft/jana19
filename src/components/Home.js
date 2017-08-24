@@ -119,7 +119,7 @@ const Home = (props) => {
 
 
   return (
-    <div className="header-wrapper" style={{"height": props.height}}>
+    <div className="header-wrapper" style={{"height": props.height, ...props.contentStyle}}>
       {Animation}
       <div className="header">
           <h3>Jana Rajakumar</h3>

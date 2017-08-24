@@ -55,17 +55,20 @@ class App extends Component {
     let pageToRender;
     switch (this.state.activePage) {
       case "Resume": {
+        if (!this.state.mobileView)
+          contentStyle.paddingRight = "30%";
+        if (this.state.width <= 1200)
+          contentStyle.paddingRight = 0;
         pageToRender = (
           <Resume 
             mobileView={this.state.mobileView}
             paddingTop={!this.state.mobileView ? 0 : 25}
             width={this.state.width}
+            contentStyle={contentStyle}
+            outerMarginLeft={this.state.drawerOpen && !this.state.mobileView ? {marginLeft: 256} : {marginLeft: 0}}
           />
         );
-        if (!this.state.mobileView)
-          contentStyle.paddingRight = "30%";
-        if (this.state.width <= 1200)
-          contentStyle.paddingRight = 0;
+
         break;
       }
       case "Social": {
@@ -73,7 +76,19 @@ class App extends Component {
         break;
       }
       case "Projects": {
-        pageToRender = <Projects/>;
+        if (!this.state.mobileView)
+          contentStyle.paddingRight = "20%";
+        if (this.state.width <= 1200)
+          contentStyle.paddingRight = 0;
+        pageToRender = (
+          <Projects
+            mobileView={this.state.mobileView}
+            paddingTop={!this.state.mobileView ? 0 : 25}
+            width={this.state.width}
+            contentStyle={contentStyle}
+          />
+        );
+
         break;
       }
       case "Contact": {
@@ -81,16 +96,22 @@ class App extends Component {
         break;
       }
       default: {
-        pageToRender = <Home height={this.state.height} />;
-        contentStyle.marginLeft = 0;
+        contentStyle.marginLeft = this.state.drawerOpen && !this.state.mobileView ? 256 : 0;
         contentStyle.marginRight = 40;
+        pageToRender = (
+          <Home 
+            height={this.state.height} 
+            contentStyle={contentStyle}
+          />
+        );
+
         break;
       }
     }
 
 
     return (
-      <div style={contentStyle}>
+      <div>
         <Sidebar 
           setActivePage={this.setActivePage}
           activePage={this.state.activePage}

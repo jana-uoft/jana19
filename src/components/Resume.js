@@ -203,7 +203,7 @@ class Resume extends Component {
 
 
     let resumeDrawerOpenIcon;
-    if (this.props.mobileView || !this.state.resumeDrawerOpen) {
+    if (!this.state.resumeDrawerOpen) {
       resumeDrawerOpenIcon = (
         <FloatingActionButton 
           style={{right: 8, top: 8, position: 'fixed', zIndex: 999}}
@@ -232,42 +232,9 @@ class Resume extends Component {
 
     return (
       <div>
-        <div style={{ textAlign: 'center'}}><span style={{color: "#fff", fontSize: 30}}>Resume</span></div>
+        <div style={{ textAlign: 'center', ...this.props.outerMarginLeft}}><span style={{color: "#fff", fontSize: 30}}>Resume</span></div>
         {resumeDrawerOpenIcon}
-        <div id="resume" style={{paddingTop: this.props.paddingTop}}>
-          <Drawer 
-            key="ResumeSidebar"
-            width={!this.props.mobileView ? '30%' : '100%'} 
-            openSecondary={true} 
-            open={this.state.resumeDrawerOpen}
-            onRequestChange={()=>this.toggleDrawer(false)}
-            docked={!this.props.mobileView}
-            disableSwipeToOpen={true} 
-          >
-            {resumeDrawerCloseIcon}
-            <div style={{textAlign: 'center', padding: 10, paddingTop: 10}}>
-              <InfoIcon/>
-              <h4>
-                A full stack software engineer with 4 years of professional experience in many programming languages, frameworks, and environments.
-              </h4>
-              <ImportExportIcon/>
-              <h4>
-                Expert in translating business requirements into robust technical solutions that are delivered on time..
-              </h4>
-              <ImportExportIcon/>
-              <h4>
-                2 years working remotely as both a solo full stack developer as well as a member of a geographically distributed Agile team.
-              </h4>
-              <ImportExportIcon/>
-              <h4>
-                Currently seeking any contract work for web development, hosting & server setup and application development.
-              </h4>
-              <ArrowDownwardIcon/><br/>
-              <a href="https://www.jana19.org/resume_JanaRajakumar.pdf" target="_blank">
-                <RaisedButton label="Download Resume" primary={true}/>
-              </a>
-            </div>
-          </Drawer>
+        <div id="resume" style={{paddingTop: this.props.paddingTop, ...this.props.contentStyle}}>
           {technicalExperience}
           <br/>
           {workExperience}
@@ -276,6 +243,40 @@ class Resume extends Component {
           <br/>
           {educationalExperience}
         </div>
+        <Drawer 
+          key="ResumeSidebar"
+          width={!this.props.mobileView ? '30%' : '100%'} 
+          openSecondary={true} 
+          open={this.state.resumeDrawerOpen}
+          onRequestChange={()=>this.toggleDrawer(false)}
+          docked={!this.props.mobileView}
+          disableSwipeToOpen={true} 
+          containerStyle={this.props.mobileView ? {top: 65} : {top: 42}}
+        >
+          {resumeDrawerCloseIcon}
+          <div style={{textAlign: 'center', padding: 0}}>
+            <InfoIcon/>
+            <h4>
+              A full stack software engineer with 4 years of professional experience in many programming languages, frameworks, and environments.
+            </h4>
+            <ImportExportIcon/>
+            <h4>
+              Expert in translating business requirements into robust technical solutions that are delivered on time..
+            </h4>
+            <ImportExportIcon/>
+            <h4>
+              2 years working remotely as both a solo full stack developer as well as a member of a geographically distributed Agile team.
+            </h4>
+            <ImportExportIcon/>
+            <h4>
+              Currently seeking any contract work for web development, hosting & server setup and application development.
+            </h4>
+            <ArrowDownwardIcon/><br/>
+            <a href="https://www.jana19.org/resume_JanaRajakumar.pdf" target="_blank">
+              <RaisedButton label="Download Resume" primary={true}/>
+            </a>
+          </div>
+        </Drawer>
       </div>
     );
   }
