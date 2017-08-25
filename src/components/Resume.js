@@ -232,7 +232,11 @@ class Resume extends Component {
 
     return (
       <div>
-        <div style={{ textAlign: 'center', ...this.props.outerMarginLeft}}><span style={{color: "#fff", fontSize: 30}}>Resume</span></div>
+        {this.props.mobileView ? 
+          <div style={{ textAlign: 'center', ...this.props.outerMarginLeft}}><span style={{color: "#fff", fontSize: 30}}>Resume</span></div>
+          :
+          null
+        }
         {resumeDrawerOpenIcon}
         <div id="resume" style={{paddingTop: this.props.paddingTop, ...this.props.contentStyle}}>
           {technicalExperience}
@@ -251,7 +255,7 @@ class Resume extends Component {
           onRequestChange={()=>this.toggleDrawer(false)}
           docked={!this.props.mobileView}
           disableSwipeToOpen={true} 
-          containerStyle={this.props.mobileView ? {top: 65} : {top: 42}}
+          containerStyle={this.props.mobileView ? {top: 65} : {top: 8}}
         >
           {resumeDrawerCloseIcon}
           <div style={{textAlign: 'center', padding: 0}}>
