@@ -18,10 +18,10 @@ const workExperiences = [
   {
     icon: <DirectionsCarIcon style={{width: 30, height: 30}}/>,
     title: "Web Developer",
-    company: "Rubeni Limo",
+    company: "Lion King Limo",
     duration: "Sep 2016 to Oct 2016",
     description: 'Created a website for a Taxi/Limo compnay. Features responsive content, online booking and newsletter enrollment. The website was created using plain HTML with CSS and PHP for contact forms.',
-    project: "rubeni"
+    project: "lionkinglimo"
   },
   {
     icon: <SupervisorAccountIcon style={{width: 30, height: 30}}/>,

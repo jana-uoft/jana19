@@ -258,7 +258,7 @@ class Resume extends Component {
           containerStyle={this.props.mobileView ? {top: 65} : {top: 8}}
         >
           {resumeDrawerCloseIcon}
-          <div style={{textAlign: 'center', padding: 0}}>
+          <div style={{textAlign: 'center', padding: 30, paddingTop: 0, paddingBottom: 0}}>
             <InfoIcon/>
             <h4>
               A full stack software engineer with 4 years of professional experience in many programming languages, frameworks, and environments.

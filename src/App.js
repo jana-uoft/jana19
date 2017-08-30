@@ -86,6 +86,7 @@ class App extends Component {
             paddingTop={!this.state.mobileView ? 0 : 25}
             width={this.state.width}
             contentStyle={contentStyle}
+            height={this.state.height} 
           />
         );
 

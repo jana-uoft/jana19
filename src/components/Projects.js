@@ -37,9 +37,9 @@ class Projects extends Component {
         chips.add(chip);
       }
     }
-    let filterData = Array.from(chips);
+    let filterData = Array.from(chips).sort();
     filterData = filterData.map((item, index) => {
-      return {key: index, label: item, backgroundColor: "#454549"}
+      return {key: item, label: item, active: false}
     })
     this.setState({filterData});
   }
@@ -56,7 +56,7 @@ class Projects extends Component {
     let filterData = this.state.filterData.map((item)=>{
       let result = {...item}
       if (item.key===key){
-        result.backgroundColor = result.backgroundColor==="#05c4c1" ? "#454549" : "#05c4c1";
+        result.active = !result.active;
       }
       return result;
     });
@@ -71,7 +71,7 @@ class Projects extends Component {
     return (
       <Chip
         key={data.key}
-        backgroundColor={data.backgroundColor}
+        backgroundColor={data.active ? "#05c4c1" : "#454549"}
         style={{margin: 'auto', marginTop: 5, marginBottom: 5}}
         onTouchTap={()=>this.toggleFilter(data.key)}
       >
@@ -80,15 +80,24 @@ class Projects extends Component {
     );
   }
 
+  checkIfActive = (label) => {
+    for (let chip of this.state.filterData) {
+      if (chip.label===label && chip.active) { return true }
+    }
+    return false;
+  }
+
   renderProject = (project) => {
+    let chips = project.chips.map((chip) => {
+      let active = this.checkIfActive(chip);
+      return {key: chip, label: chip, active}
+    })
     return (
       <GridTile rows={-1} key={project.title}>
         <Card>
           <CardHeader
             title={project.title}
-            subtitle={project.subtitle}
-            actAsExpander={true}
-            showExpandableButton={true}
+            subtitle={project.subtitle + ": " + project.duration}
           />
           <CardTitle style={{textAlign: 'center'}}>
             <img 
@@ -98,12 +107,15 @@ class Projects extends Component {
               onTouchTap={()=>{this.showImageGallery(project.images)}}
             />
           </CardTitle>
-          <CardText expandable={true}>
-            {project.desc}
+          <CardText>
+            {project.description}
           </CardText>
           <CardActions>
-            <FlatButton label="GitHub" secondary />
-            <FlatButton label="Website" secondary />
+            { project.gitHub ? <a href={project.gitHub} target="_blank"><FlatButton label="GitHub" secondary /></a> : null }
+            { project.website ? <a href={project.website} target="_blank"><FlatButton label="Website" secondary /></a> : null }
+            <div style={{ display: 'flex', flexWrap: 'wrap'}}>
+              {chips.map(this.renderChip)}
+            </div>
           </CardActions>
         </Card>
       </GridTile>
@@ -127,13 +139,14 @@ class Projects extends Component {
       );
     }
 
-    let columns = 4;
-    if (this.props.width <= 1200)
-      columns = 3
-    if (this.props.width <= 768)
-      columns = 2
-    if (this.props.width <= 500)
-      columns = 1
+    let screenSizes = {1:[0,768], 2:[769,1200], 3:[1200,1920], 4:[1920,2500], 5:[2500,3200], 6:[3200,9999]}
+    let columns;
+    for (let [col, range] of Object.entries(screenSizes)) {
+      if ((range[0]<this.props.width)===(this.props.width<=range[1])){
+        columns=parseInt(col, 10);
+        break;
+      } 
+    }
 
     return (
       <div style={this.props.contentStyle}>
@@ -143,7 +156,11 @@ class Projects extends Component {
           null
         }
         {filterDrawerOpenIcon}
-        <GridList cols={columns} style={{paddingTop: this.props.paddingTop}}>
+        <GridList 
+          cols={columns} 
+          style={{paddingTop: this.props.paddingTop}}
+          padding={20}
+        >
           {projectsList.map(this.renderProject)}
         </GridList>
         <Drawer 
