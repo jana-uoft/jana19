@@ -16,7 +16,7 @@ class Social extends Component {
     }
   }
 
-  componentDidMount() {
+  componentWillMount() {
     this.fetchPhotos().then((result)=>{
       let instagramPhotos = [];
       for (let data of result.data){
@@ -43,7 +43,10 @@ class Social extends Component {
   }
 
   toggleOverlay = (activeOverlay) => {
-    this.setState({ activeOverlay })
+    if (this.state.activeOverlay===activeOverlay)
+      this.setState({ activeOverlay: "" });
+    else
+      this.setState({ activeOverlay });
   }
 
 
@@ -51,7 +54,7 @@ class Social extends Component {
     return (
       <GridTile rows={-1} key={pic.url}>
         <Card>
-          <CardMedia overlay={this.state.activeOverlay===pic.url ? <CardTitle subtitle={pic.caption} /> : null } >
+          <CardMedia overlay={this.state.activeOverlay===pic.url ? <CardTitle subtitle={pic.caption} /> : null } onClick={()=>this.toggleOverlay(pic.url)}>
             <img src={pic.url} alt={pic.caption} onMouseOver={()=>this.toggleOverlay(pic.url)} />
           </CardMedia>
         </Card>
@@ -79,7 +82,7 @@ class Social extends Component {
         }
         <br/>
         <GridList 
-          cols={7} 
+          cols={6} 
           style={{paddingTop: this.props.paddingTop, textAlign: "center"}}
         >
           <GridTile rows={-1} key={"instagram"}>
@@ -96,9 +99,6 @@ class Social extends Component {
           </GridTile>
           <GridTile rows={-1} key={"github"}>
             <SocialIcon url="https://github.com/jana-uoft" />
-          </GridTile>
-          <GridTile rows={-1} key={"google"}>
-            <SocialIcon url="https://plus.google.com/+JanaRajkumar" />
           </GridTile>
           <GridTile rows={-1} key={"snapchat"}>
             <SocialIcon url="https://www.snapchat.com/add/jana.stc" />
