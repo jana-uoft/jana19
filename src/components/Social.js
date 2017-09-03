@@ -42,7 +42,9 @@ class Social extends Component {
     });
   }
 
-  toggleOverlay = (activeOverlay) => {
+  toggleOverlay = (activeOverlay, click) => {
+    if (click==="click" && !this.props.mobileView)
+      return;
     if (this.state.activeOverlay===activeOverlay)
       this.setState({ activeOverlay: "" });
     else
@@ -55,7 +57,7 @@ class Social extends Component {
       <GridTile rows={-1} key={pic.url}>
         <Card>
           <CardMedia overlay={this.state.activeOverlay===pic.url ? <CardTitle subtitle={pic.caption} /> : null } onClick={()=>this.toggleOverlay(pic.url)}>
-            <img src={pic.url} alt={pic.caption} onMouseOver={()=>this.toggleOverlay(pic.url)} />
+            <img src={pic.url} alt={pic.caption} onMouseOver={()=>this.toggleOverlay(pic.url)} onClick={()=>this.toggleOverlay(pic.url, "click")}/>
           </CardMedia>
         </Card>
       </GridTile>
