@@ -1,7 +1,13 @@
-import Portfolio01 from '../../assets/projects/portfolio/01.PNG';
-import Portfolio02 from '../../assets/projects/portfolio/02.PNG';
-import Portfolio03 from '../../assets/projects/portfolio/03.PNG';
-import Portfolio04 from '../../assets/projects/portfolio/04.PNG';
+import NodeAPI01 from '../../assets/projects/node_api/node_api_01.jpg';
+import NodeAPI02 from '../../assets/projects/node_api/node_api_02.png';
+import NodeAPI03 from '../../assets/projects/node_api/node_api_03.jpg';
+import NodeAPI04 from '../../assets/projects/node_api/node_api_04.jpg';
+
+import Portfolio01 from '../../assets/projects/portfolio/portfolio01.PNG';
+import Portfolio02 from '../../assets/projects/portfolio/portfolio02.PNG';
+import Portfolio03 from '../../assets/projects/portfolio/portfolio03.PNG';
+import Portfolio04 from '../../assets/projects/portfolio/portfolio04.PNG';
+import Portfolio05 from '../../assets/projects/portfolio/portfolio05.PNG';
 
 import budget01 from '../../assets/projects/budget/budget01.PNG';
 import budget02 from '../../assets/projects/budget/budget02.PNG';
@@ -33,6 +39,8 @@ import zodus04 from '../../assets/projects/zodus/zodus04.PNG';
 import zodus05 from '../../assets/projects/zodus/zodus05.PNG';
 import zodus06 from '../../assets/projects/zodus/zodus06.PNG';
 
+import TSP01 from '../../assets/projects/tsp/tsp_01.png';
+
 import pizzeria01 from '../../assets/projects/pizzeria/pizzeria01.PNG';
 import pizzeria02 from '../../assets/projects/pizzeria/pizzeria02.PNG';
 import pizzeria03 from '../../assets/projects/pizzeria/pizzeria03.PNG';
@@ -44,20 +52,29 @@ import pizzeria05 from '../../assets/projects/pizzeria/pizzeria05.PNG';
 
 const projectsList = [
   {
+    title: "NodeJS Express MongoDB",
+    subtitle: "REST API",
+    duration: "Sep 2017 to Current",
+    description: "Currently working on a hobby project to create a fully restful API using NodeJS, Express and MongoDB. The API will have a working authentication system using JWT and with future support for OAuth as well.",
+    gitHub: "https://github.com/jana-uoft/node_express_mongo_api",
+    images: [NodeAPI01, NodeAPI02, NodeAPI03, NodeAPI04],
+    chips: ["NodeJS", "ExpressJS", "MongoDB", "API", "JWT"]
+  },
+  {
     title: "Personal Portfolio",
     subtitle: "Individual",
     duration: "Aug 2017 to Aug 2017",
-    description: "Created a personal portfolio to list my projects and skills while learning ReactJS and Continuos Integration development. The wesbite is built using React and Material UI components. Continuos Integration is done using Jenkins with GitHub webhooks. The site is hosted from my personal home server using No-IP to resolve dynamic IP address.",
+    description: "Created a personal portfolio to list my projects and skills. This was created while learning ReactJS and Continuos Integration development (Jenkins). The wesbite was built using ReactJS and Material UI components. Continuos Integration was done using Jenkins Pipeline via GitHub webhooks. The site is hosted from my personal home server using No-IP to resolve dynamic IP address.",
     website: "https://www.jana19.org/",
     gitHub: "https://github.com/jana-uoft/portfolio",
-    images: [Portfolio01, Portfolio02, Portfolio03, Portfolio04],
-    chips: ["React", "Material UI", "Jenkins"]
+    images: [Portfolio01, Portfolio02, Portfolio03, Portfolio04, Portfolio05],
+    chips: ["ReactJS", "Material UI", "Jenkins"]
   },
   {
     title: "Budget",
     subtitle: "Personal Budgeting App",
     duration: "May 2016 to Jun 2016",
-    description: "Created a Personal Budget web application. Features adding monthly budgets and carry forwarding, adding daily trasactions and transfers, viewing reports in any date range and adding multiple financial accounts and cash accounts. I made this while learning Django framework as to test my knowledge and get comfortable with the framework. This is mainly focused to be used at home for personal simple budgeting needs. Check out more of the functions by logging in with the demo credentials. Username: piedpiper, Passwrod: johncena. The site is hosted with Heroku.",
+    description: "Created a Personal Budget web application. Features adding monthly budgets, carry forwarding balances, adding daily trasactions and transfers, viewing reports in any date range and adding multiple financial accounts and cash accounts. Check out more of about the app by logging in with the following demo credentials. Username: piedpiper and Password: johncena. The site is hosted with Heroku.",
     website: "https://personal-budget.herokuapp.com/",
     gitHub: "https://github.com/jana-uoft/personal_budget",
     images: [budget01, budget02, budget03, budget04, budget05],
@@ -67,7 +84,7 @@ const projectsList = [
     title: "Persondal Portfolio Old",
     subtitle: "Individual",
     duration: "Nov 2016 to Dec 2016",
-    description: "This was the earlier version of my personal portfollio. I built the back-end with Pyhon and Django framework and modified an already existing front-end responsive theme. All the content in the website was served through external JSON files from my dropbox public folder. Used CloudFare CDN to cache the website. The site was hosted with Heroku.",
+    description: "This was the earlier version of my personal portfollio. It was built using Pyton and Django framework. The CSS template was modified from an already existing front-end responsive theme. All the content in the website was served through external JSON files hosted from my dropbox public folder. Used CloudFare CDN to cache the website. The site was hosted with Heroku.",
     gitHub: "https://github.com/jana-uoft/portfolio_old",
     images: [portfolio_old01, portfolio_old02, portfolio_old03, portfolio_old04, portfolio_old05, portfolio_old06],
     chips: ["Python", "Django", "jQuery", "Heroku", "CDN", "Bootstrap", "CSS"]
@@ -76,16 +93,16 @@ const projectsList = [
     title: "Google Reviews",
     subtitle: "Wordpress Plugin",
     duration: "Nov 2016 to Nov 2016",
-    description: "Developed a WordPress plugin that pulls business reviews from Google Places API. It stores reviews in the internal wordpress database and displays them via a custom widget or a shortcode. The plugin will update the database daily and pull in new reviews if any.",
+    description: "Developed a WordPress plugin that pulls business reviews from Google Places API. It stores reviews in the internal wordpress database and displays them via a custom widget or a shortcode. The plugin will listen for updates from the database in a daily basis and fetch new reviews if any.",
     gitHub: "https://github.com/jana-uoft/google_reviews_plugin",
     images: [google_reviews_plugin01, google_reviews_plugin02, google_reviews_plugin03, google_reviews_plugin04],
-    chips: ["PHP", "Wordpress", "MySQL", "API"]
+    chips: ["Wordpress", "PHP", "MySQL"]
   },
   {
     title: "Lion King Limo",
     subtitle: "Taxi/Limo Website",
     duration: "May 2016 to Jun 2016",
-    description: "Created a website for a Taxi/Limo company. Features responsive content, online booking and newsletter enrollment.",
+    description: "Created a website for a Taxi/Limo company. Featured responsive content, online booking and an online newsletter enrollment.",
     gitHub: "https://github.com/jana-uoft/lionkinglimo",
     images: [lionkinglimo01, lionkinglimo02, lionkinglimo03, lionkinglimo04],
     chips: ["PHP", "Bootstrap", "CSS", "jQuery"]
@@ -94,18 +111,28 @@ const projectsList = [
     title: "Zodus",
     subtitle: "Job Board",
     duration: "Nov 2015 to Nov 2016",
-    description: "Created a Job Board website. Features candidate and employer dashboards, job posting & resume pricing plans and front-end job & resume submissions.",
+    description: "Created a Job Board website. Featured candidate and employer dashboards, job posting & resume pricing plans with front-end job & resume submissions.",
     images: [zodus01, zodus02, zodus03, zodus04, zodus05, zodus06],
-    chips: ["Wordpress", "PHP", "MySQL", "API", "Bootstrap", "CSS", "jQuery"]
+    chips: ["Wordpress", "PHP", "MySQL", "Bootstrap", "CSS", "jQuery"]
+  },
+  {
+    title: "TSP Artificial Intelligence",
+    subtitle: "University Project",
+    duration: "Mar 2016 to Apr 2016",
+    description: "A project from an Artificial Intelligence course at University based on the Travelling Salesman Problem. We compared the space and time complexity of different heuristics searches. More specifically, we compared Greedy, A* and its variants - Beam Search, Iterative Deepening and Dynamic Weighting. The codebase was in Python.",
+    gitHub: "https://github.com/jana-uoft/travelling_sales_person_AI",
+    images: [TSP01],
+    chips: ["Python", "AI", "Algorithm"]
   },
   {
     title: "The House of Pizzeria",
     subtitle: "Restaurant Website",
-    duration: "Mat 2015 to May 2015",
-    description: "Created a website for a restaurant. Features responsive content, online ordering system, online reservations, interactive food menu and carrousel gallery. The website was created using WordPress. I designed the restaurant logo and the food menu board. Also created flyers and banners using Adobe Fireworks. The project was discontinued on Jan 2016.",
+    duration: "Mar 2015 to May 2015",
+    description: "Created a website for a restaurant. Featured responsive content, online ordering system, online reservations, interactive food menu and carrousel gallery. The website was created using WordPress. I designed the restaurant logo and the food menu board. Also created flyers and banners using Adobe Fireworks.",
     images: [pizzeria01, pizzeria02, pizzeria03, pizzeria04, pizzeria05],
-    chips: ["PHP", "Wordpress", "MySQL", "API", "CSS", "Bootstrap", "jQuery"]
-  },
+    chips: ["Wordpress", "PHP", "MySQL", "CSS", "Bootstrap", "jQuery"]
+  }
+
 ];
 
 export default projectsList;

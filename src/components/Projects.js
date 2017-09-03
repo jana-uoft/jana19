@@ -16,6 +16,7 @@ class Projects extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      projectsList: [],
       filterDrawerOpen: !props.mobileView,
       filterData: [],
       images: [],
@@ -41,7 +42,7 @@ class Projects extends Component {
     filterData = filterData.map((item, index) => {
       return {key: item, label: item, active: false}
     })
-    this.setState({filterData});
+    this.setState({filterData, projectsList});
   }
 
   toggleDrawer = (filterDrawerOpen) => {
@@ -60,7 +61,17 @@ class Projects extends Component {
       }
       return result;
     });
-    this.setState({ filterData });
+    this.setState({ filterData }, ()=>this.filterProjects());
+  }
+
+  filterProjects = () => {
+    let activeChipsLabels = this.state.filterData.filter((chip) => {return chip.active}).map((chip) => {return chip.label});
+    let newProjectsList = projectsList.filter((project) => {
+      return project.chips.some(chip => activeChipsLabels.includes(chip))
+    });
+    if (newProjectsList.length === 0)
+      newProjectsList = projectsList;
+    this.setState({ projectsList: newProjectsList });
   }
 
   showImageGallery = (images) => {
@@ -77,6 +88,20 @@ class Projects extends Component {
       >
         {data.label}
       </Chip>
+    );
+  }
+
+  renderChipInGrid = (data) => {
+    return (
+      <GridTile rows={-1} key={data.key}>
+        <Chip
+          backgroundColor={data.active ? "#05c4c1" : "#454549"}
+          style={{margin: 'auto', marginTop: 5, marginBottom: 5}}
+          onTouchTap={()=>this.toggleFilter(data.key)}
+        >
+          {data.label}
+        </Chip>
+      </GridTile>
     );
   }
 
@@ -97,7 +122,7 @@ class Projects extends Component {
         <Card>
           <CardHeader
             title={project.title}
-            subtitle={project.subtitle + ": " + project.duration}
+            subtitle={project.subtitle}
           />
           <CardTitle style={{textAlign: 'center'}}>
             <img 
@@ -107,12 +132,15 @@ class Projects extends Component {
               onTouchTap={()=>{this.showImageGallery(project.images)}}
             />
           </CardTitle>
-          <CardText>
+          <CardActions>
+            <span style={{fontSize: 12, paddingLeft: 10}}>{project.duration}</span>
+            { project.gitHub ? <a href={project.gitHub} target="_blank"><FlatButton label="GitHub" secondary /></a> : null }
+            { project.website ? <a href={project.website} target="_blank"><FlatButton label="Website" secondary /></a> : null }
+          </CardActions>
+          <CardText style={{textAlign: "justify"}}>
             {project.description}
           </CardText>
           <CardActions>
-            { project.gitHub ? <a href={project.gitHub} target="_blank"><FlatButton label="GitHub" secondary /></a> : null }
-            { project.website ? <a href={project.website} target="_blank"><FlatButton label="Website" secondary /></a> : null }
             <div style={{ display: 'flex', flexWrap: 'wrap'}}>
               {chips.map(this.renderChip)}
             </div>
@@ -161,7 +189,7 @@ class Projects extends Component {
           style={{paddingTop: this.props.paddingTop}}
           padding={20}
         >
-          {projectsList.map(this.renderProject)}
+          {this.state.projectsList.map(this.renderProject)}
         </GridList>
         <Drawer 
           key="ProjectSidebar"
@@ -174,11 +202,11 @@ class Projects extends Component {
           containerStyle={{ backgroundColor: '#2f2f33' }}
 
         >
-          <div style={{textAlign: 'center', padding: 0}}>
+          <div style={{textAlign: 'center', padding: 10}}>
             <h4> Filter Projects </h4>
-            <div style={{ display: 'flex', flexWrap: 'wrap'}}>
-              {this.state.filterData.map(this.renderChip)}
-            </div>
+            <GridList cols={this.props.mobileView ? 2 : 3} >
+              {this.state.filterData.map(this.renderChipInGrid)}
+            </GridList>
           </div>
         </Drawer>
         {this.state.isGalleryOpen &&

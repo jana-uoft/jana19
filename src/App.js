@@ -72,7 +72,13 @@ class App extends Component {
         break;
       }
       case "Social": {
-        pageToRender = <Social/>;
+        pageToRender = (
+          <Social 
+            mobileView={this.state.mobileView}
+            paddingTop={!this.state.mobileView ? 0 : 25}
+            contentStyle={contentStyle}
+          />
+        );
         break;
       }
       case "Projects": {
@@ -93,7 +99,13 @@ class App extends Component {
         break;
       }
       case "Contact": {
-        pageToRender = <Contact/>;
+        pageToRender = (
+          <Contact
+            mobileView={this.state.mobileView}
+            paddingTop={!this.state.mobileView ? 0 : 25}
+            contentStyle={contentStyle}
+          />
+        );
         break;
       }
       default: {

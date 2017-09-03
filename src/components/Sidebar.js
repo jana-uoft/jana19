@@ -36,16 +36,16 @@ class Sidebar extends Component {
           onClick={()=>this.props.setActivePage("Resume")} 
         />
         <ListItem 
-          primaryText="Social" 
-          leftIcon={<GroupIcon />} 
-          style={this.props.activePage==="Social"? {backgroundColor: '#39424f'} : null} 
-          onClick={()=>this.props.setActivePage("Social")} 
-        />
-        <ListItem 
           primaryText="Projects" 
           leftIcon={<DeveloperModeIcon />} 
           style={this.props.activePage==="Projects"? {backgroundColor: '#39424f'} : null} 
           onClick={()=>this.props.setActivePage("Projects")} 
+        />
+        <ListItem 
+          primaryText="Social" 
+          leftIcon={<GroupIcon />} 
+          style={this.props.activePage==="Social"? {backgroundColor: '#39424f'} : null} 
+          onClick={()=>this.props.setActivePage("Social")} 
         />
         <ListItem 
           primaryText="Contact" 
