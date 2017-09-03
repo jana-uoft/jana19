@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import {GridList, GridTile} from 'material-ui/GridList';
+import axios from 'axios';
+
 
 class Social extends Component {
   constructor(props) {
@@ -10,8 +12,11 @@ class Social extends Component {
   }
 
   componentDidMount() {
-    fetch("https://api.instagram.com/v1/users/self/media/recent/?access_token=508727293.1677ed0.69d96553324f4468917af711a368260b&count=16", {dataType: "jsonp"})
-    .then(response => response.json())
+    axios.get("https://api.instagram.com/v1/users/self/media/recent/?access_token=508727293.1677ed0.69d96553324f4468917af711a368260b&count=16", {
+      headers: {
+          'Access-Control-Allow-Origin': '*',
+        },
+    })
     .then((result) => {
       console.log(result);
       let instagramPhotos = result.data.map((data) => {return {url: data.images.standard_resolution.url, caption: data.caption.text}})

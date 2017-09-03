@@ -109,8 +109,9 @@ class App extends Component {
         break;
       }
       default: {
-        contentStyle.marginLeft = this.state.drawerOpen && !this.state.mobileView ? 256 : 0;
-        contentStyle.marginRight = 40;
+        contentStyle.marginLeft = this.state.drawerOpen && !this.state.mobileView ? 256 : -40;
+        contentStyle.marginRight = this.state.mobileView ? 0 : 40;
+
         pageToRender = (
           <Home 
             height={this.state.height} 
