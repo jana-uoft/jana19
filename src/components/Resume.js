@@ -91,7 +91,6 @@ class Resume extends Component {
           <p style={{textAlign: 'justify', marginTop: 0}}>
             {experience.description} &nbsp;
             {experience.website!==undefined ? <a style={{color: "#02dba1", textDecoration: 'none'}} href={experience.website} target="_blank">Visit website</a> : null}
-            {experience.project!==undefined ? <a style={{color: "#02dba1", cursor: 'pointer'}} onClick={()=>{}} target="_blank">View work</a> : null}
           </p>
         </TableRowColumn>
       </TableRow>
