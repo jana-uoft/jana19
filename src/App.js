@@ -77,6 +77,7 @@ class App extends Component {
             mobileView={this.state.mobileView}
             paddingTop={!this.state.mobileView ? 0 : 25}
             contentStyle={contentStyle}
+            width={this.state.width}
           />
         );
         break;
