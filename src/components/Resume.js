@@ -257,8 +257,11 @@ class Resume extends Component {
           containerStyle={this.props.mobileView ? {top: 65} : {top: 8}}
         >
           {resumeDrawerCloseIcon}
-          <div style={{textAlign: 'center', padding: 30, paddingTop: 0, paddingBottom: 0}}>
-            <InfoIcon/>
+          <div style={{textAlign: 'center', padding: 30, paddingTop: 10, paddingBottom: 0}}>
+            <a href="https://www.jana19.org/resume_JanaRajakumar.pdf" target="_blank">
+              <RaisedButton label="Download Resume" primary={true}/>
+            </a>
+            <br/>
             <h4>
               A full stack software engineer with 4 years of professional experience in many programming languages, frameworks, and environments.
             </h4>
@@ -268,12 +271,8 @@ class Resume extends Component {
             </h4>
             <ImportExportIcon/>
             <h4>
-              Currently seeking any contract work for web development, hosting & server setup and application development.
+              Currently seeking any contract work for web/app development, hosting & server setup.
             </h4>
-            <ArrowDownwardIcon/><br/>
-            <a href="https://www.jana19.org/resume_JanaRajakumar.pdf" target="_blank">
-              <RaisedButton label="Download Resume" primary={true}/>
-            </a>
           </div>
         </Drawer>
       </div>
