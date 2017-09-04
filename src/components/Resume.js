@@ -264,11 +264,7 @@ class Resume extends Component {
             </h4>
             <ImportExportIcon/>
             <h4>
-              Expert in translating business requirements into robust technical solutions that are delivered on time..
-            </h4>
-            <ImportExportIcon/>
-            <h4>
-              2 years working remotely as both a solo full stack developer as well as a member of a geographically distributed Agile team.
+              Expert in translating business requirements into robust technical solutions that are delivered on time.
             </h4>
             <ImportExportIcon/>
             <h4>
