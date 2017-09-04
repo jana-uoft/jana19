@@ -68,7 +68,7 @@ const projectsList = [
     website: "https://www.jana19.org/",
     gitHub: "https://github.com/jana-uoft/portfolio",
     images: [Portfolio01, Portfolio02, Portfolio03, Portfolio04, Portfolio05],
-    chips: ["ReactJS", "Material UI", "Jenkins"]
+    chips: ["NodeJS", "ReactJS", "Material UI", "Jenkins"]
   },
   {
     title: "Budget",
