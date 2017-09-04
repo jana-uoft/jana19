@@ -64,7 +64,7 @@ const projectsList = [
     title: "Personal Portfolio",
     subtitle: "Individual",
     duration: "Aug 2017 to Aug 2017",
-    description: "Created a personal portfolio to list my projects and skills. This was created while learning ReactJS and Continuos Integration development (Jenkins). The wesbite was built using ReactJS and Material UI components. Continuos Integration was done using Jenkins Pipeline via GitHub webhooks. The site is hosted from my personal home server using No-IP to resolve dynamic IP address.",
+    description: "Created a personal portfolio to list my projects and skills. This was created while learning ReactJS and Continuous Integration development (Jenkins). The wesbite was built using ReactJS and Material UI components. Continuos Integration was done using Jenkins Pipeline via GitHub webhooks. The site is hosted from my personal home server using No-IP to resolve dynamic IP address.",
     website: "https://www.jana19.org/",
     gitHub: "https://github.com/jana-uoft/portfolio",
     images: [Portfolio01, Portfolio02, Portfolio03, Portfolio04, Portfolio05],
