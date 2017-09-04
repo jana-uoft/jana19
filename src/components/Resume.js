@@ -8,17 +8,13 @@ import ComputerIcon from 'material-ui-icons/Computer';
 import WorkIcon from 'material-ui-icons/Work';
 import PeopleIcon from 'material-ui-icons/People';
 import SchoolIcon from 'material-ui-icons/School';
-
+import ImportExportIcon from 'material-ui-icons/ImportExport';
 
 import technicalExperiences from './Resume/technicalExperience';
 import workExperiences from './Resume/workExperience';
 import volunteerExperiences from './Resume/volunteerExperience';
 import educationalExperiences from './Resume/educationalExperience';
 
-
-import ImportExportIcon from 'material-ui-icons/ImportExport';
-import InfoIcon from 'material-ui-icons/Info';
-import ArrowDownwardIcon from 'material-ui-icons/ArrowDownward';
 
 
 import {
