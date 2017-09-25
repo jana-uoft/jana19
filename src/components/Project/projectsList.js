@@ -81,10 +81,10 @@ const projectsList = [
     chips: ["Python", "Django", "jQuery", "CSS", "Bootsrap", "Heroku"]
   },
   {
-    title: "Persondal Portfolio Old",
+    title: "Personal Portfolio Old",
     subtitle: "Individual",
     duration: "Nov 2016 to Dec 2016",
-    description: "This was the earlier version of my personal portfollio. It was built using Pyton and Django framework. The CSS template was modified from an already existing front-end responsive theme. All the content in the website was served through external JSON files hosted from my dropbox public folder. Used CloudFare CDN to cache the website. The site was hosted with Heroku.",
+    description: "This was the earlier version of my personal portfolio. It was built using Python and Django framework. The CSS template was modified from an already existing front-end responsive theme. All the content in the website was served through external JSON files hosted from my dropbox public folder. Used CloudFare CDN to cache the website. The site was hosted with Heroku.",
     gitHub: "https://github.com/jana-uoft/portfolio_old",
     images: [portfolio_old01, portfolio_old02, portfolio_old03, portfolio_old04, portfolio_old05, portfolio_old06],
     chips: ["Python", "Django", "jQuery", "Heroku", "CDN", "Bootstrap", "CSS"]
