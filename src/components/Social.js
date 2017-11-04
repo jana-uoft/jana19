@@ -36,7 +36,7 @@ class Social extends Component {
 
   fetchPhotos = () => {
     return $.ajax({
-        url: 'https://api.instagram.com/v1/users/self/media/recent/?access_token=508727293.1677ed0.69d96553324f4468917af711a368260b&count=10',
+        url: 'https://api.instagram.com/v1/users/self/media/recent/?access_token=508727293.1677ed0.69d96553324f4468917af711a368260b&count=20',
         type: 'GET',
         dataType: "jsonp"
     });
