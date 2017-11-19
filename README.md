@@ -23,15 +23,6 @@
     yarn start
   </pre>
 
-**Testing:**
-  <ul>
-  <li>
-    <code> 
-      yarn test 
-    </code>
-  </li>
-    <li> JUnit xml test results and HTML test coverage report will be generated under the root directory </li>
-  </ul>
 
 **Production:**
   <ul>
