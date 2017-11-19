@@ -12,7 +12,7 @@
 **Prerequisites:**
   <ul>
     <li> <a href="https://nodejs.org/en/"> NodeJS </a> </li>
-    <li> Using <a href="https://www.npmjs.com/package/yarn"> yarn </a> is recommended </li>
+    <li> <a href="https://www.npmjs.com/package/yarn"> yarn </a> is recommended </li>
   </ul>
   
 **Development:**
