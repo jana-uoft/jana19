@@ -1,3 +1,20 @@
+import VISCOLL01 from '../../assets/projects/viscoll/viscoll01.PNG';
+import VISCOLL02 from '../../assets/projects/viscoll/viscoll02.PNG';
+import VISCOLL03 from '../../assets/projects/viscoll/viscoll03.PNG';
+import VISCOLL04 from '../../assets/projects/viscoll/viscoll04.PNG';
+import VISCOLL05 from '../../assets/projects/viscoll/viscoll05.PNG';
+import VISCOLL06 from '../../assets/projects/viscoll/viscoll06.PNG';
+import VISCOLL07 from '../../assets/projects/viscoll/viscoll07.PNG';
+import VISCOLL08 from '../../assets/projects/viscoll/viscoll08.PNG';
+import VISCOLL09 from '../../assets/projects/viscoll/viscoll09.PNG';
+import VISCOLL010 from '../../assets/projects/viscoll/viscoll010.PNG';
+import VISCOLL011 from '../../assets/projects/viscoll/viscoll011.PNG';
+
+import IIIFAPI01 from '../../assets/projects/iiifAPI/iiifAPI01.PNG';
+import IIIFAPI02 from '../../assets/projects/iiifAPI/iiifAPI02.PNG';
+import IIIFAPI03 from '../../assets/projects/iiifAPI/iiifAPI03.PNG';
+import IIIFAPI04 from '../../assets/projects/iiifAPI/iiifAPI04.PNG';
+
 import NodeAPI01 from '../../assets/projects/node_api/node_api_01.jpg';
 import NodeAPI02 from '../../assets/projects/node_api/node_api_02.png';
 import NodeAPI03 from '../../assets/projects/node_api/node_api_03.jpg';
@@ -52,9 +69,29 @@ import pizzeria05 from '../../assets/projects/pizzeria/pizzeria05.PNG';
 
 const projectsList = [
   {
+    title: "Viscoll",
+    subtitle: "Visual Collation",
+    duration: "Mar 2017 to Mar 2018",
+    description: "VisColl is for building models of the physical collation of manuscripts, and then visualizing them in various ways. Powered by an API built with Ruby and Rails on MongoDB and served by a React-Redux progressive web app.",
+    gitHub: "https://github.com/utlib/VisualCollation",
+    website: "https://viscoll.library.utoronto.ca",
+    images: [VISCOLL01, VISCOLL02, VISCOLL03, VISCOLL04, VISCOLL05, VISCOLL06, VISCOLL07, VISCOLL08, VISCOLL09, VISCOLL010, VISCOLL011],
+    chips: ["ReactJS", "Redux", "Rails", "Ruby", "MongoDB", "API", "JWT", "Jenkins", "Chef", "Slack", "JIRA", "Confluence"]
+  },
+  {
+    title: "UTL IIIF API",
+    subtitle: "REST API",
+    duration: "Jan 2017 to Mar 2018",
+    description: "An API service that implements the IIIF Image API, Presentation API, Search API and Authentication API.Powered by Python - Django framework and MongoDB.",
+    gitHub: "https://github.com/utlib/utl_iiif_api",
+    website: "https://iiif.library.utoronto.ca/presentation/v2",
+    images: [IIIFAPI01, IIIFAPI02, IIIFAPI03, IIIFAPI04],
+    chips: ["Python", "Django", "MongoDB", "API", "JWT", "Jenkins", "Chef", "Slack", "JIRA", "Confluence"]
+  },
+  {
     title: "NodeJS Express MongoDB",
     subtitle: "REST API",
-    duration: "Sep 2017 to Current",
+    duration: "Sep 2017 to Sep 2017",
     description: "Currently working on a hobby project to create a fully restful API using NodeJS, Express and MongoDB. The API will have a working authentication system using JWT and with future support for OAuth as well.",
     gitHub: "https://github.com/jana-uoft/node_express_mongo_api",
     images: [NodeAPI01, NodeAPI02, NodeAPI03, NodeAPI04],
@@ -78,7 +115,7 @@ const projectsList = [
     website: "https://personal-budget.herokuapp.com/",
     gitHub: "https://github.com/jana-uoft/personal_budget",
     images: [budget01, budget02, budget03, budget04, budget05],
-    chips: ["Python", "Django", "jQuery", "CSS", "Bootsrap", "Heroku"]
+    chips: ["Python", "Django", "jQuery", "CSS", "Bootstrap", "Heroku"]
   },
   {
     title: "Personal Portfolio Old",
