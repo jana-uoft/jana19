@@ -1,32 +1,30 @@
 #!groovy
 
-def errorOccured = false // Used to check buildStatus during any stage
+def errorMessage = "" // Used to check buildStatus during any stage
 
 def isDeploymentBranch(){
-  return CURRENT_BRANCH==PRODUCTION_BRANCH || CURRENT_BRANCH==DEVELOPMENT_BRANCH;
+  def currentBranch = env.GIT_BRANCH.getAt((env.GIT_BRANCH.indexOf('/')+1..-1))
+  return currentBranch==PRODUCTION_BRANCH || currentBranch==DEVELOPMENT_BRANCH;
 }
 
 def getSuffix() {
-  return CURRENT_BRANCH==DEVELOPMENT_BRANCH ? '-dev' : '';
+  def currentBranch = env.GIT_BRANCH.getAt((env.GIT_BRANCH.indexOf('/')+1..-1))
+  return currentBranch==DEVELOPMENT_BRANCH ? '-dev' : '';
 }
 
 pipeline {
   // construct global env variables
   environment {
     SITE_NAME = 'testing' // Name will be used for archive file (with suffix '-dev' if DEVELOPMENT_BRANCH)
-    CHEF_RECIPE_NAME = 'app-testing' // Name of the chef recipe to trigger in Deploy stage
     PRODUCTION_BRANCH = 'master' // Source branch used for production
     DEVELOPMENT_BRANCH = 'dev' // Source branch used for development
     SLACK_CHANNEL = '#builds' // Slack channel to send build notifications
-    CURRENT_BRANCH = env.GIT_BRANCH.getAt((env.GIT_BRANCH.indexOf('/')+1..-1)) // (eg) origin/master: get string after '/'
-    COMMIT_MESSAGE = sh(returnStdout: true, script: 'git log -1 --pretty=%B').trim() // Auto generated
-    COMMIT_AUTHOR = sh(returnStdout: true, script: 'git --no-pager show -s --format=%an').trim() // Auto generated
   }
   agent any
   stages {
     stage('Start') {
       steps {
-        notifySlack() // Send 'Build Started' notification
+        notifySlack channel: SLACK_CHANNEL
       }
     }
     stage ('Install Packages') {
@@ -37,13 +35,18 @@ pipeline {
             nodejs(nodeJSInstallationName: '10.6.0') {
               sh 'yarn 2>commandResult'
             }
-          } catch (e) { if (!errorOccured) { errorOccured = "Failed while installing node packages.\n\n${readFile('commandResult').trim()}\n\n${e.message}"} }
+          } catch (e) {
+            if (!errorMessage) {
+              errorMessage = "Failed while installing node packages.\n\n${readFile('commandResult').trim()}\n\n${e.message}"
+            }
+            currentBuild.currentResult = 'FAILURE'
+          }
         }
       }
     }
     stage ('Test') {
       // Skip stage if an error has occured in previous stages
-      when { expression { return !errorOccured; } }
+      when { expression { return !errorMessage; } }
       steps {
         // Test
         script {
@@ -51,31 +54,18 @@ pipeline {
             nodejs(nodeJSInstallationName: '10.6.0') {
               sh 'yarn test 2>commandResult'
             }
-          } catch (e) { if (!errorOccured) {errorOccured = "Failed while testing.\n\n${readFile('commandResult').trim()}\n\n${e.message}"} }
-        }
-      }
-      post {
-        always {
-          // Publish junit test results
-          junit testResults: 'junit_test_results.xml', allowEmptyResults: true
-          // Publish clover.xml and html(if generated) test coverge report
-          // step([
-          //   $class: 'CloverPublisher',
-          //   cloverReportDir: 'coverage',
-          //   cloverReportFileName: 'clover.xml',
-          //   failingTarget: [methodCoverage: 75, conditionalCoverage: 75, statementCoverage: 75]
-          // ])
-          // script {
-          //   if (!errorOccured && currentBuild.resultIsWorseOrEqualTo('UNSTABLE')) {
-          //     errorOccured = "Insufficent Test Coverage."
-          //   }
-          // }
+          } catch (e) {
+            if (!errorMessage) {
+              errorMessage = "Failed while testing.\n\n${readFile('commandResult').trim()}\n\n${e.message}"
+            }
+            currentBuild.currentResult = 'UNSTABLE'
+          }
         }
       }
     }
     stage ('Build') {
       // Skip stage if an error has occured in previous stages or if not isDeploymentBranch
-      when { expression { return !errorOccured && isDeploymentBranch(); } }
+      when { expression { return !errorMessage && isDeploymentBranch(); } }
       steps {
         script {
           try {
@@ -83,13 +73,18 @@ pipeline {
             nodejs(nodeJSInstallationName: '10.6.0') {
               sh 'yarn build 2>commandResult'
             }
-          } catch (e) { if (!errorOccured) {errorOccured = "Failed while building.\n\n${readFile('commandResult').trim()}\n\n${e.message}"} }
+          } catch (e) {
+            if (!errorMessage) {
+              errorMessage = "Failed while building.\n\n${readFile('commandResult').trim()}\n\n${e.message}"
+            }
+            currentBuild.currentResult = 'UNSTABLE'
+          }
         }
       }
     }
     stage ('Upload Archive') {
       // Skip stage if an error has occured in previous stages or if not isDeploymentBranch
-      when { expression { return !errorOccured && isDeploymentBranch(); } }
+      when { expression { return !errorMessage && isDeploymentBranch(); } }
       steps {
         script {
           try {
@@ -97,30 +92,37 @@ pipeline {
             sh 'mkdir -p ./ARCHIVE 2>commandResult'
             sh 'mv node_modules/ ARCHIVE/ 2>commandResult'
             sh 'mv build/* ARCHIVE/ 2>commandResult'
-            // sh "cd ARCHIVE && tar zcf ${SITE_NAME}${getSuffix()}.tar.gz * --transform \"s,^,${SITE_NAME}${getSuffix()}/,S\" --exclude=${SITE_NAME}${getSuffix()}.tar.gz --overwrite --warning=none && cd .. 2>commandResult"
-            // Upload archive to server
-            // sh "scp ARCHIVE/${SITE_NAME}${getSuffix()}.tar.gz root@jana19.org:/root/ 2>commandResult"
-          } catch (e) { if (!errorOccured) {errorOccured = "Failed while uploading archive.\n\n${readFile('commandResult').trim()}\n\n${e.message}"} }
+          } catch (e) {
+            if (!errorMessage) {
+              errorMessage = "Failed while uploading archive.\n\n${readFile('commandResult').trim()}\n\n${e.message}"
+            }
+            currentBuild.currentResult = 'FAILURE'
+          }
         }
       }
     }
     stage ('Deploy') {
       // Skip stage if an error has occured in previous stages or if not isDeploymentBranch
-      when { expression { return !errorOccured && isDeploymentBranch(); } }
+      when { expression { return !errorMessage && isDeploymentBranch(); } }
       steps {
         script {
           try {
             // Deploy app
             sh "rsync -azP --ignore-times ARCHIVE/ root@jana19.org:/var/www/jana19.org/"
-          } catch (e) { if (!errorOccured) {errorOccured = "Failed while deploying.\n\n${readFile('commandResult').trim()}\n\n${e.message}"} }
+          } catch (e) {
+            if (!errorMessage) {
+              errorMessage = "Failed while deploying.\n\n${readFile('commandResult').trim()}\n\n${e.message}"
+            }
+            currentBuild.currentResult = 'FAILURE'
+          }
         }
       }
     }
   }
   post {
     always {
+      notifySlack status: currentBuild.currentResult, message: errorMessage, channel: SLACK_CHANNEL
       cleanWs() // Recursively clean workspace
-      notifySlack(errorOccured) // Send final 'Success/Failed' message based on errorOccured.
     }
   }
 }
