@@ -22,13 +22,9 @@ pipeline {
   }
   agent any
   stages {
-    stage('Start') {
-      steps {
-        notifySlack channel: SLACK_CHANNEL
-      }
-    }
     stage ('Install Packages') {
       steps {
+        notifySlack status: 'STARTED', channel: SLACK_CHANNEL
         script {
           try {
             // Install required node packages
@@ -121,7 +117,7 @@ pipeline {
   }
   post {
     always {
-      notifySlack status: currentBuild.currentResult, message: errorMessage, channel: SLACK_CHANNEL
+      notifySlack message: errorMessage, channel: SLACK_CHANNEL
       cleanWs() // Recursively clean workspace
     }
   }
